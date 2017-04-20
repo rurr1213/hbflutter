@@ -7,3 +7,15 @@
 [submodule "src/core/firecast"]
 	path = src/core/firecast
 	url = git@192.168.1.50:blackfire/core-firecast.git
+[submodule "src/sample"]
+	path = src/sample
+	url = git@192.168.1.50:blackfire/android/sample.git
+[submodule "src/common/java"]
+	path = src/common/java
+	url = git@192.168.1.50:blackfire/common/java.git
+[submodule "src/common/media"]
+	path = src/common/media
+	url = git@192.168.1.50:blackfire/common/media
+[submodule "src/common/src/common/helper"]
+	path = src/common/helper
+	url = git@192.168.1.50:blackfire/common/helper.git
