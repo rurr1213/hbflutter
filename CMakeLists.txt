@@ -84,7 +84,7 @@ if(FC_PLATFORM STREQUAL "Studio")
 	)
 else()
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-psabi")
-	set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -fno-rtti")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
 endif()
 
 build_platform(
