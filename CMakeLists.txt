@@ -95,6 +95,7 @@ build_platform(
 	DEFAULTS
 	    Core
 		Opus
+		Trace
 	OPTIONS
 		THREAD_MONITOR
 	COMPONENTS
