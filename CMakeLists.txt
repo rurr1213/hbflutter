@@ -93,6 +93,7 @@ build_platform(
 	OS android
 	BOARD generic
 	DEFAULTS
+		GCC
 	    Core
 		Opus
 		Trace
