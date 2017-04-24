@@ -103,11 +103,12 @@ build_platform(
 		${PLATFORM_COMPONENTS}
 )
 
-if(NOT FC_PLATFORM STREQUAL "Studio")
-	file(RELATIVE_PATH PROJECT_ROOT ${CMAKE_CURRENT_LIST_DIR}/src/samples/android/eclipse ${CMAKE_CURRENT_LIST_DIR})
+if(0)
+#if(NOT FC_PLATFORM STREQUAL "Studio")
+	file(RELATIVE_PATH PROJECT_ROOT ${CMAKE_CURRENT_LIST_DIR}/src/sample ${CMAKE_CURRENT_LIST_DIR})
 	file(RELATIVE_PATH PROJECT_PREFIX ${CMAKE_CURRENT_LIST_DIR} ${CMAKE_INSTALL_PREFIX})
 	set(PROJECT_COMMON_DIR src/common/helper)
-	set(PROJECT_MEDIASOURCE_DIR src/common/libFCMediaSource)
-	configure_file(${CMAKE_CURRENT_LIST_DIR}/Application.mk.in ${CMAKE_CURRENT_LIST_DIR}/src/samples/android/eclipse/jni/Application.mk)
-	configure_file(${CMAKE_CURRENT_LIST_DIR}/Android.mk.in ${CMAKE_CURRENT_LIST_DIR}/src/samples/android/eclipse/jni/Android.mk)
+	set(PROJECT_MEDIASOURCE_DIR src/common/media/libFCMediaSource)
+	configure_file(${CMAKE_CURRENT_LIST_DIR}/Application.mk.in ${CMAKE_CURRENT_LIST_DIR}/src/sample/jni/Application.mk)
+	configure_file(${CMAKE_CURRENT_LIST_DIR}/Android.mk.in ${CMAKE_CURRENT_LIST_DIR}/src/sample/jni/Android.mk)
 endif()
