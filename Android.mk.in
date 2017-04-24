@@ -1,0 +1,153 @@
+LOCAL_PATH := $(call my-dir)
+
+PLATINCDIR	= $(ROOT)/${PROJECT_PREFIX}/include
+PLATLIBDIR	= $(ROOT)/${PROJECT_PREFIX}/lib
+ifeq ($(APP_OPTIM),debug)
+  PLATFORMFILE  = $(PLATLIBDIR)/libFCPlatformd.a
+else
+  PLATFORMFILE  = $(PLATLIBDIR)/libFCPlatform.a
+endif
+
+include $(CLEAR_VARS)
+LOCAL_MODULE			:= libFC
+ifeq ($(APP_OPTIM),debug)
+LOCAL_SRC_FILES			:= $(PLATLIBDIR)/libFCd.a
+else
+LOCAL_SRC_FILES			:= $(PLATLIBDIR)/libFC.a
+endif
+include $(PREBUILT_STATIC_LIBRARY)
+
+ifneq ($(wildcard $(PLATFORMFILE)),) 
+include $(CLEAR_VARS)
+LOCAL_MODULE			:= libFCPlatform
+ifeq ($(APP_OPTIM),debug)
+LOCAL_SRC_FILES			:= $(PLATLIBDIR)/libFCPlatformd.a
+else
+LOCAL_SRC_FILES			:= $(PLATLIBDIR)/libFCPlatform.a
+endif
+include $(PREBUILT_STATIC_LIBRARY)
+endif
+
+include $(CLEAR_VARS)
+LOCAL_MODULE			:= libwavpacktiny
+ifeq ($(APP_OPTIM),debug)
+LOCAL_SRC_FILES			:= $(PLATLIBDIR)/libwavpacktinyd.a
+else
+LOCAL_SRC_FILES			:= $(PLATLIBDIR)/libwavpacktiny.a
+endif
+include $(PREBUILT_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE			:= libopus
+ifeq ($(APP_OPTIM),debug)
+LOCAL_SRC_FILES			:= $(PLATLIBDIR)/libopusd.a
+else
+LOCAL_SRC_FILES			:= $(PLATLIBDIR)/libopus.a
+endif
+include $(PREBUILT_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE			:= libspeexdsp
+ifeq ($(APP_OPTIM),debug)
+LOCAL_SRC_FILES			:= $(PLATLIBDIR)/libspeexdspd.a
+else
+LOCAL_SRC_FILES			:= $(PLATLIBDIR)/libspeexdsp.a
+endif
+include $(PREBUILT_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE			:= libFCMediaSrcDrv
+ifeq ($(APP_OPTIM),debug)
+LOCAL_SRC_FILES			:= $(PLATLIBDIR)/libFCMediaSrcDrvd.a
+else
+LOCAL_SRC_FILES			:= $(PLATLIBDIR)/libFCMediaSrcDrv.a
+endif
+include $(PREBUILT_STATIC_LIBRARY)
+
+ifeq ($(APP_SOURCETOSOURCE),1)
+include $(CLEAR_VARS)
+LOCAL_MODULE			:= libFCSTS
+ifeq ($(APP_OPTIM),debug)
+LOCAL_SRC_FILES			:= $(PLATLIBDIR)/libFCSTSd.a
+else
+LOCAL_SRC_FILES			:= $(PLATLIBDIR)/libFCSTS.a
+endif
+include $(PREBUILT_STATIC_LIBRARY)
+endif
+
+include $(CLEAR_VARS)
+LOCAL_MODULE  := spotify
+LOCAL_SRC_FILES	:=  $(PLATLIBDIR)/libspotify.so
+LOCAL_LDLIBS := -llog -lOpenSLES
+LOCAL_CPPFLAGS := -g -Wno-psabi -DSPOTIFY #for modified sound_driver
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE  := spotify-plusplus
+LOCAL_SRC_FILES	:=  $(PLATLIBDIR)/libspotify-plusplus.so
+LOCAL_LDLIBS := -llog -lOpenSLES
+LOCAL_CPPFLAGS := -g -Wno-psabi -DSPOTIFY #for modified sound_driver
+LOCAL_SHARED_LIBRARIES := spotify
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)  
+LOCAL_MODULE  := JLibSpotify
+LOCAL_SRC_FILES := $(PLATLIBDIR)/libJLibSpotify.so
+LOCAL_CPPFLAGS := -g -Wno-psab
+include $(PREBUILT_SHARED_LIBRARY)
+
+ifeq ($(APP_FFMPEG),1)
+include $(CLEAR_VARS)
+LOCAL_MODULE			:= libavutil
+LOCAL_SRC_FILES			:= $(PLATLIBDIR)/libavutil.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+
+include $(CLEAR_VARS)
+LOCAL_MODULE			:= libavformat
+LOCAL_SRC_FILES			:= $(PLATLIBDIR)/libavformat.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+
+include $(CLEAR_VARS)
+LOCAL_MODULE			:= libavcodec
+LOCAL_SRC_FILES			:= $(PLATLIBDIR)/libavcodec.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+endif
+
+include $(CLEAR_VARS)
+LOCAL_MODULE           := blackfire
+ifeq ($(APP_FFMPEG),1)
+LOCAL_SRC_FILES := \
+	$(ROOT)/${PROJECT_MEDIASOURCE_DIR}/avAudioDecode.cpp \
+	$(ROOT)/${PROJECT_MEDIASOURCE_DIR}/avCodecSource.cpp \
+	$(ROOT)/${PROJECT_MEDIASOURCE_DIR}/avDemux.cpp
+endif
+LOCAL_SRC_FILES := $(LOCAL_SRC_FILES) \
+	$(ROOT)/${PROJECT_COMMON_DIR}/wavMediaSource.cpp \
+	$(ROOT)/${PROJECT_COMMON_DIR}/helper.cpp \
+	$(ROOT)/${PROJECT_COMMON_DIR}/eventHelper.cpp \
+	$(JNIDIR)/../../common/cpp/jMediaController.cpp \
+	$(JNIDIR)/../../common/cpp/jEventHandler.cpp \
+	$(JNIDIR)/../../common/cpp/jDeviceConfigure.cpp
+	
+LOCAL_C_INCLUDES       := $(PLATINCDIR)
+ifeq ($(APP_SOURCETOSOURCE),1)
+LOCAL_STATIC_LIBRARIES := libFC libspeexdsp libopus libwavpacktiny libFCPlatform libFCMediaSrcDrv libFCSTS
+else
+LOCAL_STATIC_LIBRARIES := libFC libspeexdsp libwavpacktiny libFCPlatform libopus libFCMediaSrcDrv
+endif
+ifeq ($(APP_FFMPEG),1)
+LOCAL_SHARED_LIBRARIES := libavformat libavcodec libavutil
+endif
+LOCAL_CFLAGS		   := -g -pthread -D__STDC_CONSTANT_MACROS -DFC_ENABLE_THREAD_MONITOR -DFC_ENABLE_TRACE -DFC_ENABLE_TRACE_SOCKET  -std=gnu++0x
+LOCAL_CXXFLAGS		   := -g -pthread -D__STDC_CONSTANT_MACROS -DFC_ENABLE_THREAD_MONITOR -DFC_ENABLE_TRACE -DFC_ENABLE_TRACE_SOCKET
+ifeq ($(APP_SPEAKER_ACTIVE),0)
+LOCAL_CXXFLAGS		   := $(LOCAL_CXXFLAGS) -DDEFAULT_INACTIVE
+endif
+ifeq ($(APP_FFMPEG),1)
+LOCAL_CXXFLAGS		   := $(LOCAL_CXXFLAGS) -DFFMPEG
+endif
+LOCAL_LDLIBS           := -L$(SYSROOT)/usr/lib -llog -lc -lz -lstdc++
+include $(BUILD_SHARED_LIBRARY)
