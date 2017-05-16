@@ -1,14 +1,14 @@
 [submodule "build"]
 	path = build
-	url = git@192.168.1.50:blackfire/core-build.git
+	url = ../../../core-build.git
 	branch = .
 [submodule "src/core/codecs"]
 	path = src/core/codecs
-	url = git@192.168.1.50:blackfire/core-codecs.git
+	url = ../../../core-codecs.git
 	branch = .
 [submodule "src/core/firecast"]
 	path = src/core/firecast
-	url = git@192.168.1.50:blackfire/core-firecast.git
+	url = ../../../core-firecast.git
 	branch = .
 [submodule "src/sample"]
 	path = src/sample
@@ -28,4 +28,4 @@
 	branch = .
 [submodule "src/common/spotify"]
 	path = src/common/spotify
-	url = git@192.168.1.50:blackfire/common/spotify.git
+	url = ../../../common/spotify.git
