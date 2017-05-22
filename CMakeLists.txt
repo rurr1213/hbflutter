@@ -51,27 +51,6 @@ install(
 	DESTINATION sdk/include
 )
 
-# IMPORTED libspotify
-set(SPOTIFY_LIB_DIR ${CMAKE_CURRENT_LIST_DIR}/sdk/libspotify-12.1.51/lib)
-set(SPOTIFY_INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/sdk/libspotify-12.1.51/include)
-add_library(spotify SHARED IMPORTED)
-set_target_properties(spotify PROPERTIES
-	IMPORTED_LOCATION ${SPOTIFY_LIB_DIR}/libspotify.so
-)
-set_target_properties(spotify PROPERTIES
-	INTERFACE_INCLUDE_DIRECTORIES ${LIBAV_INCLUDE_DIR}
-)
-install(
-	FILES
-		${SPOTIFY_LIB_DIR}/libspotify.so
-	DESTINATION sdk/lib
-)
-install(
-	DIRECTORY
-		${SPOTIFY_INCLUDE_DIR}/libspotify
-	DESTINATION sdk/include
-)
-
 # Sample deployment
 install(
 	DIRECTORY
@@ -98,6 +77,9 @@ set(PLATFORM_COMPONENTS
 	common/media/libFCMediaSource
 	common/helper
 	common/java
+	common/spotify/libspotify/android
+	common/spotify/libspotify-plusplus
+	common/spotify/libjspotify
 )
 if(FC_PLATFORM STREQUAL "Studio")
 	set(PLATFORM_COMPONENTS ${PLATFORM_COMPONENTS}
