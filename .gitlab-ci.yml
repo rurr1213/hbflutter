@@ -2,21 +2,33 @@ stages:
  - build
 
 variables:
- GIT_STRATEGY: fetch
  GIT_SUBMODULE_STRATEGY: recursive
 
-build:sample:
+sample:
  stage: build
  script:
-  - ./src/sample/gradlew assembleDebug
-  - cp src/sample/build/outputs/apk/sample-debug.apk ./sample.apk
+ - cmd /C %CI_PROJECT_DIR%\src\sample\gradlew.bat -p %CI_PROJECT_DIR%\src\sample assembleDebug
+ - copy src\sample\build\outputs\apk\sample-debug.apk sample.apk
  tags:
-  - android
-  - linux
+ - android
  only:
-  - triggers
-  - /^v(\d+\.)?(\d+\.)?(\*|\d+)$/
+ - /^v(\d+\.)?(\d+\.)?(\*|\d+)$/
  artifacts:
-  name: "sample-$CI_COMMIT_REF_NAME"
+  name: "sample"
   paths:
-   - sample.apk
+  - sample.apk
+
+sample-test:
+ stage: build
+ script:
+ - cmd /C %CI_PROJECT_DIR%\src\sample\gradlew.bat -p %CI_PROJECT_DIR%\src\sample assembleDebug
+ - copy src\sample\build\outputs\apk\sample-debug.apk sample.apk
+ tags:
+ - android
+ only:
+ - /test\/sample\/.*/
+ artifacts:
+  name: "sample"
+  expire_in: 1 week
+  paths:
+  - sample.apk
