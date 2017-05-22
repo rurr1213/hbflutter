@@ -39,7 +39,7 @@ install(
 		${LIBAV_LIB_DIR}/libavformat.so
 		${LIBAV_LIB_DIR}/libavutil.so
 		${LIBAV_LIB_DIR}/libswscale.so
-	DESTINATION lib
+	DESTINATION sdk/lib
 )
 install(
 	DIRECTORY
@@ -48,7 +48,7 @@ install(
 		${LIBAV_INCLUDE_DIR}/libavfilter
 		${LIBAV_INCLUDE_DIR}/libavformat
 		${LIBAV_INCLUDE_DIR}/libavutil
-	DESTINATION include
+	DESTINATION sdk/include
 )
 
 # IMPORTED libspotify
@@ -64,12 +64,32 @@ set_target_properties(spotify PROPERTIES
 install(
 	FILES
 		${SPOTIFY_LIB_DIR}/libspotify.so
-	DESTINATION lib
+	DESTINATION sdk/lib
 )
 install(
 	DIRECTORY
 		${SPOTIFY_INCLUDE_DIR}/libspotify
-	DESTINATION include
+	DESTINATION sdk/include
+)
+
+# Sample deployment
+install(
+	DIRECTORY
+		src/sample/gen
+		src/sample/jni
+		src/sample/res
+		src/sample/src
+	DESTINATION src/sample
+	PATTERN "obj" EXCLUDE
+	PATTERN ".svn" EXCLUDE
+)
+install(
+	FILES
+		src/sample/AndroidManifest.xml
+		src/sample/build.gradle
+		src/sample/lint.xml
+		src/sample/project.properties
+	DESTINATION src/sample
 )
 
 # Firecast build
@@ -77,6 +97,7 @@ set(PLATFORM_COMPONENTS
 	common/media/libFCMediaSrcDrv
 	common/media/libFCMediaSource
 	common/helper
+	common/java
 )
 if(FC_PLATFORM STREQUAL "Studio")
 	set(PLATFORM_COMPONENTS ${PLATFORM_COMPONENTS}
@@ -97,11 +118,17 @@ build_platform(
 	    Core
 		Opus
 		Trace
+		PID
+		Update
 	OPTIONS
 		THREAD_MONITOR
 	COMPONENTS
 		${PLATFORM_COMPONENTS}
 )
+
+get_property(FC_GLOBAL_CFLAGS GLOBAL PROPERTY FC_GLOBAL_DEFINITIONS)
+configure_file(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.install ${CMAKE_BINARY_DIR}/CMakeLists.txt @ONLY)
+install(FILES ${CMAKE_BINARY_DIR}/CMakeLists.txt DESTINATION ./)
 
 if(0)
 #if(NOT FC_PLATFORM STREQUAL "Studio")

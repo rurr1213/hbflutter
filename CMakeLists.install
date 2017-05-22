@@ -1,0 +1,42 @@
+cmake_minimum_required(VERSION 3.6)
+include(sdk/cmake/options.cmake)
+include(sdk/cmake/FCPlatform.cmake)
+include(sdk/cmake/speexdsp.cmake)
+include(sdk/cmake/wavpacktiny.cmake)
+include(sdk/cmake/opus.cmake)
+include(sdk/cmake/FC.cmake)
+include(sdk/cmake/FCManagement.cmake)
+include(sdk/cmake/FCUpdate.cmake)
+include(sdk/cmake/FCMediaSource.cmake)
+include(sdk/cmake/FCMediaSrcDrv.cmake)
+include(sdk/cmake/helper.cmake)
+add_library(avcodec SHARED IMPORTED)
+set_target_properties(avcodec PROPERTIES
+	IMPORTED_LOCATION ${CMAKE_CURRENT_LIST_DIR}/sdk/lib/libavcodec.so
+)
+add_library(avdevice SHARED IMPORTED)
+set_target_properties(avdevice PROPERTIES
+	IMPORTED_LOCATION ${CMAKE_CURRENT_LIST_DIR}/sdk/lib/libavdevice.so
+)
+add_library(avfilter SHARED IMPORTED)
+set_target_properties(avfilter PROPERTIES
+	IMPORTED_LOCATION ${CMAKE_CURRENT_LIST_DIR}/sdk/lib/libavfilter.so
+)
+add_library(avformat SHARED IMPORTED)
+set_target_properties(avformat PROPERTIES
+	IMPORTED_LOCATION ${CMAKE_CURRENT_LIST_DIR}/sdk/lib/libavformat.so
+)
+add_library(avutil SHARED IMPORTED)
+set_target_properties(avutil PROPERTIES
+	IMPORTED_LOCATION ${CMAKE_CURRENT_LIST_DIR}/sdk/lib/libavutil.so
+)
+add_library(swscale SHARED IMPORTED)
+set_target_properties(swscale PROPERTIES
+	IMPORTED_LOCATION ${CMAKE_CURRENT_LIST_DIR}/sdk/lib/libswscale.so
+)
+add_library(spotify SHARED IMPORTED)
+set_target_properties(spotify PROPERTIES
+	IMPORTED_LOCATION ${CMAKE_CURRENT_LIST_DIR}/sdk/lib/libspotify.so
+)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/sdk/include)
+add_subdirectory(src/sample/jni)

@@ -29,3 +29,6 @@
 [submodule "src/common/spotify"]
 	path = src/common/spotify
 	url = ../../../common/spotify.git
+[submodule "src/core/dbclient"]
+	path = src/core/dbclient
+	url = ../../../core-dbclient.git
