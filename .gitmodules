@@ -22,7 +22,7 @@
 	path = src/common/media
 	url = ../../../common/media
 	branch = .
-[submodule "src/common/src/common/helper"]
+[submodule "src/common/helper"]
 	path = src/common/helper
 	url = ../../../common/helper.git
 	branch = .
