@@ -73,6 +73,7 @@ install(
 
 # Firecast build
 set(PLATFORM_COMPONENTS
+	common/media/libFCMediaSrcWav
 	common/media/libFCMediaSrcDrv
 	common/media/libFCMediaSource
 	common/helper
