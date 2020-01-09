@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
+import 'homePanel.dart';
 
 void main() => runApp(MyApp());
 
@@ -67,75 +68,62 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-        appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: Text(widget.title),
-        ),
-        body: Center(
-          // Center is a layout widget. It takes a single child and positions it
-          // in the middle of the parent.
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-//                  color: Colors.blue,
-/*
-                  constraints: BoxConstraints(
-                      maxWidth: 300.0,
-                      minWidth: 200.0,
-                      maxHeight: 200.0,
-                      minHeight: 150.0
-                  ),
-*/
-                  child: new Column(
+      appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: Text(widget.title),
+      ),
+      body: Center(
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(
+                child: new Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    //mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                  new Row(
+                      // top menu
                       mainAxisAlignment: MainAxisAlignment.center,
-                      //mainAxisSize: MainAxisSize.max,
+                      mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        new Row( // top menu
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                               //new LoginForm(
-                               new MyTestForm(
-                               ),
-                            ]
-                        ),
-                        new Row( // main body
+                        //new LoginForm(
+                        //new MyTestForm(),
+                        new HomePanel(),
+                      ]),
+                  new Row(
+                      // main body
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        new Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[ new Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  new Text(
-                                    'You have pushed this button this many times Ravi2:',
-                                    style: new TextStyle(fontSize: 12.0,
-                                        color: const Color(0xFF000000),
-                                        fontWeight: FontWeight.w200,
-                                        fontFamily: "Roboto"),
-                                  ),
-                                  new Text(
-                                    '$_counter',
-                                    style: Theme
-                                        .of(context)
-                                        .textTheme
-                                        .display1,
-                                  ),
-                                ]
-                            )
-                            ]
-                        )
-                      ]
-                  )
-              ),
-            ],
-          ),
+                            children: <Widget>[
+                              new Text(
+                                'You have pushed this button this many times Ravi3:',
+                                style: new TextStyle(
+                                    fontSize: 12.0,
+                                    color: const Color(0xFF000000),
+                                    fontWeight: FontWeight.w200,
+                                    fontFamily: "Roboto"),
+                              ),
+                              new Text(
+                                '$_counter',
+                                style: Theme.of(context).textTheme.display1,
+                              ),
+                            ])
+                      ])
+                ])),
+          ],
         ),
+      ),
       drawer: Drawer(
         elevation: 16.0,
         child: Column(
@@ -176,59 +164,58 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _incrementCounter,
-          tooltip: 'Increment',
-          child: Icon(Icons.add),
-        ),
-        // This trailing comma makes auto-formatting nicer for build methods.
-        persistentFooterButtons: <Widget>[
-          RaisedButton(
-            elevation: 10.0,
-            onPressed: () {},
-            color: Colors.blueGrey,
-            child: Icon(
-              Icons.clear,
-              color: Colors.white,
-            ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),
+      // This trailing comma makes auto-formatting nicer for build methods.
+      persistentFooterButtons: <Widget>[
+        RaisedButton(
+          elevation: 10.0,
+          onPressed: () {},
+          color: Colors.blueGrey,
+          child: Icon(
+            Icons.clear,
+            color: Colors.white,
           ),
-          RaisedButton(
-            elevation: 10.0,
-            onPressed: () {},
-            child: Icon(
-              Icons.add,
-              color: Colors.white,
-            ),
-            color: Colors.green,
+        ),
+        RaisedButton(
+          elevation: 10.0,
+          onPressed: () {},
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+          color: Colors.green,
+        ),
+      ],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0,
+        fixedColor: Colors.teal,
+        items: [
+          BottomNavigationBarItem(
+            title: Text("Home"),
+            icon: Icon(Icons.home),
+          ),
+          BottomNavigationBarItem(
+            title: Text("Search"),
+            icon: Icon(Icons.search),
+          ),
+          BottomNavigationBarItem(
+            title: Text("Add"),
+            icon: Icon(Icons.add_box),
           ),
         ],
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: 0,
-          fixedColor: Colors.teal,
-          items: [
-            BottomNavigationBarItem(
-              title: Text("Home"),
-              icon: Icon(Icons.home),
-            ),
-            BottomNavigationBarItem(
-              title: Text("Search"),
-              icon: Icon(Icons.search),
-            ),
-            BottomNavigationBarItem(
-              title: Text("Add"),
-              icon: Icon(Icons.add_box),
-            ),
-          ],
-          onTap: (int index) {
-            setState(() {
-           //   currentIndex = index;
-            });
-          },
-        ),
+        onTap: (int index) {
+          setState(() {
+            //   currentIndex = index;
+          });
+        },
+      ),
     );
   }
 }
-
 
 class MyTestForm extends StatefulWidget {
   MyTestForm({Key key, this.title}) : super(key: key);
@@ -245,45 +232,45 @@ class _MyTestFormState extends State<MyTestForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
-        key: _formKey,
-        child: Row(
-            children: <Widget>[
+      key: _formKey,
+      child: Row(
+        children: <Widget>[
           Container(
-                constraints: BoxConstraints(
-                    maxHeight: 300.0,
-                    maxWidth: 200.0,
-                    minWidth: 150.0,
-                    minHeight: 150.0
+            constraints: BoxConstraints(
+                maxHeight: 300.0,
+                maxWidth: 200.0,
+                minWidth: 150.0,
+                minHeight: 150.0),
+            child: Column(
+              children: <Widget>[
+                TextFormField(
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
                 ),
-                child: Column(
-                  children: <Widget> [
-                  TextFormField(
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Please enter some text';
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: RaisedButton(
+                    onPressed: () {
+                      // Validate returns true if the form is valid, or false
+                      // otherwise.
+                      if (_formKey.currentState.validate()) {
+                        // If the form is valid, display a Snackbar.
+                        Scaffold.of(context).showSnackBar(
+                            SnackBar(content: Text('Processing Data')));
                       }
-                      return null;
                     },
+                    child: Text('Submit'),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: RaisedButton(
-                      onPressed: () {
-                        // Validate returns true if the form is valid, or false
-                        // otherwise.
-                        if (_formKey.currentState.validate()) {
-                          // If the form is valid, display a Snackbar.
-                          Scaffold.of(context)
-                              .showSnackBar(SnackBar(content: Text('Processing Data')));
-                        }
-                      },
-                      child: Text('Submit'),
-                    ),
-                    ),
-                  ],
                 ),
-          ),],
-        ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

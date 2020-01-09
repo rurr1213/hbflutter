@@ -14,7 +14,7 @@ class LoginFormState extends State<LoginForm> {
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
   //
-  // Note: This is a GlobalKey<FormState>,
+  // Note: This is a  GlobalKey<FormState>,
   // not a GlobalKey<LoginFormState>.
   final _formKey = GlobalKey<FormState>();
 
