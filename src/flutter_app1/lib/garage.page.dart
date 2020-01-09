@@ -1,4 +1,3 @@
-import 'main.dart';
 import 'package:flutter/material.dart';
 
 class GaragePage extends StatefulWidget {
@@ -44,6 +43,7 @@ class _GaragePageState extends State<GaragePage> {
         children: <Widget>[
           IconButton(icon: Icon(Icons.home), onPressed: () {Navigator.of(context).pushReplacementNamed('/home');},),
           IconButton(icon: Icon(Icons.local_car_wash), onPressed: () { Navigator.of(context).pushReplacementNamed('/garage');},),
+          IconButton(icon: Icon(Icons.message), onPressed: () { Navigator.of(context).pushReplacementNamed('/backChannel');},),
         ],
       ),
     ),

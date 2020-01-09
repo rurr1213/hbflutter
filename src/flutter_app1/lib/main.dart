@@ -10,6 +10,7 @@
 import 'home.page.dart';
 import 'login.page.dart';
 import 'garage.page.dart';
+import 'backchannel.page.dart';
 import 'auth.service.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +34,8 @@ void main() async {
       // Set routes for using the Navigator.
       '/home': (BuildContext context) => new HomePage(),
       '/login': (BuildContext context) => new LoginPage(),
-      '/garage': (BuildContext context) => new GaragePage()
+      '/garage': (BuildContext context) => new GaragePage(),
+      '/backChannel': (BuildContext context) => new BackChannelPage()
     },
   ));
 }

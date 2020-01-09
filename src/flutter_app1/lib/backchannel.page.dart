@@ -1,11 +1,17 @@
-import 'main.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class BackChannelPage extends StatefulWidget {
+  const BackChannelPage({ Key key }) : super(key: key);
+  @override
+  _BackChannelPageState createState() => _BackChannelPageState();
+}
+
+class _BackChannelPageState extends State<BackChannelPage> {
+  String _garageState = "Garage C losed";
   @override
   Widget build(BuildContext context) => new Scaffold(
     appBar: new AppBar(
-      title: new Text('Home'),
+      title: new Text('BackChannel'),
     ),
     body: new Container(
       margin: new EdgeInsets.only(
@@ -14,28 +20,19 @@ class HomePage extends StatelessWidget {
       alignment: Alignment.center,
       child: new Column(
         children: <Widget>[
-          new Text('Welcome to App!'),
+          new Text(_garageState),
           new RaisedButton(
-              child: new Text(
-                  'Logout'
-              ),
-              onPressed: () {
-                appAuth.logout().then(
-                        (_) => Navigator.of(context).pushReplacementNamed('/login')
-                );
-              }
+            child: new Text(
+                'OpenGarage'
+            ),
+            onPressed: () { setState( () { _garageState = "Garage Open"; }); },
           ),
           new RaisedButton(
-              child: new Text(
-              'OpenGarage'
-              ),
-                onPressed: () {
-                  appAuth.logout().then(
-                          (_) => Navigator.of(context).pushReplacementNamed('/garage')
-                  );
-                }
+            child: new Text(
+                'CloseGarage'
             ),
-
+            onPressed: () { setState( () { _garageState = "Garage Closed"; }); },
+          )
         ],
       ),
     ),
